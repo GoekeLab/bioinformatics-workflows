@@ -1,3 +1,5 @@
+## Running the proof of concept Nextflow pipeline
+
 1. Install `nextflow` by following the instructions [here](https://www.nextflow.io/)
 2. Optionally move the `nextflow` directory to a directory in your path
    i.e.  `echo $PATH` and then `mv nextflow usr/bin`
