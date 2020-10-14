@@ -1,5 +1,27 @@
 #!/usr/bin/env nextflow
 
+// help message
+def helpMessage() {
+    log.info"""
+    Usage:
+
+        nextflow run example.nf --ref ref.fasta[.gz] --left path/to/reads_1.fastq --right path/to/reads_2.fastq --outdir path/to/resultdir
+
+    --ref       Path to reference transcript (fasta[.gz])
+    --left      Path to left strand (fastq)
+    --right     Path to right strand (fastq)
+    --outdir    Output directory (where output results will be saved)  
+    --help      Displays usage message  
+
+    """.stripIndent()
+}
+
+// Show help message
+if (params.help) {
+    helpMessage()
+    exit 0
+}
+
 
 // Create reference transcriptome index using Salmom
 process salmonIndex {
