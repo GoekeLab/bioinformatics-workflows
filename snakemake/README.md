@@ -6,7 +6,7 @@
    - `reads_1.fastq`
    - `reads_2.fastq`
    - `transcripts.fasta`
-4. Run the a dry-run of the pipeline with the folling command:
+4. Run the a dry-run of the pipeline with the following command:
    - `snakemake -n results/salmon/quant/ results/fastqc/`
    - to run snakemake we tell the program what output files we want rather than passing input parameters
 5. Run with the following command, specifying the number of cores
