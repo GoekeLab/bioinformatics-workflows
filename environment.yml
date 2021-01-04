@@ -1,0 +1,9 @@
+# To create a conda environment type the following command into your terminal:
+#   conda env create -f environment.yml
+name: bioinformatics-workflows-rnaseq
+channels:
+  - bioconda
+  - defaults
+dependencies:
+  - bioconda::fastqc=0.11.9
+  - bioconda::salmon=1.4.0
