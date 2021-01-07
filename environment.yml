@@ -2,8 +2,10 @@
 #   conda env create -f environment.yml
 name: bioinformatics-workflows-rnaseq
 channels:
+  - conda-forge
   - bioconda
   - defaults
 dependencies:
+  - conda-forge::bzip2=1.0.8
   - bioconda::fastqc=0.11.9
   - bioconda::salmon
