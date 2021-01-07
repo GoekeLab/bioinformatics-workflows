@@ -6,6 +6,7 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - conda-forge::bzip2=1.0.8
+  - conda-forge::bzip2
+
   - bioconda::fastqc=0.11.9
   - bioconda::salmon
