@@ -20,3 +20,6 @@ The [nf-core projects](https://nf-co.re/) hosts community curated nextflow pipel
 
 ## Notes and Contribution
 This pipeline is a minimal example of using nextflow. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+
+## How to cite Nextflow
+Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316–319. doi:10.1038/nbt.3820
