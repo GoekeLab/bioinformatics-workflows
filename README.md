@@ -43,5 +43,5 @@ Workflow managers have many more features which are not used in these implementa
 - [CWL](https://www.commonwl.org/user_guide/index.html)
 - [Toil](https://toil.readthedocs.io/en/latest/)
 
-## Contact and Contribution
-Implementations were written by [Laura Wratten](https://github.com/lwratten). If you would like to add an implementation for any of these workflow managers, or if you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
+## Contact and Call for Contribution
+Implementations were written by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
