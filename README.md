@@ -4,7 +4,7 @@
 These pipelines are intended as a proof-of-concept demonstrate the distinctions between bioinformatics workflow managers.
 The analysis workflow used for the proof-of-concept is a small portion of an RNA-seq workflow, using the tool `salmon` for transcriptome alignment and quantification and `fastqc` for quality control.
 
-![](docs/imgs/review_poc.png?raw=true)
+![](docs/imgs/workflow_online_description_small.png)
 
 ## Tools
 To run locally, install [salmon](https://github.com/COMBINE-lab/salmon/) and [fastqc](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
