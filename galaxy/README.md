@@ -18,3 +18,7 @@ Galaxy is a web-based platform to develeop and execute bioinformatics workflows.
 ## Notes and Contribution
 This pipeline is a minimal example of using Galaxy. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
 
+## How to cite Galaxy
+Afgan E, Baker D, Batut B, van den Beek M, Bouvier D, Čech M, Chilton J, Clements D, Coraor N, Grüning BA, Guerler A, Hillman-Jackson J, Hiltemann S, Jalili V, Rasche H, Soranzo N, Goecks J, Taylor J, Nekrutenko A, Blankenberg D. "The Galaxy platform for accessible, reproducible and collaborative biomedical analyses: 2018 update" Nucleic Acids Res. (2018) 46(W1):W537-W544 doi:10.1093/nar/gky379
+
+see also https://galaxyproject.org/citing-galaxy/ for more ways to cite Galaxy.
