@@ -20,3 +20,6 @@ The Workflow Description Language ([WDL](https://openwdl.org/)) is a workflow sp
 
 ## Notes and Contribution
 This pipeline is a minimal example of using WDL. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+
+## How to cite WDL 
+Voss K, Gentry J and Van der Auwera G. Full-stack genomics pipelining with GATK4 + WDL + Cromwell (version 1; not peer reviewed). F1000Research 2017, 6(ISCB Comm J):1379 (poster) (doi: 10.7490/f1000research.1114631.1)
