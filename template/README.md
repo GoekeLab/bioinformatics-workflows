@@ -17,4 +17,5 @@ Add description and links to community-developed pipelines.
 ## Notes and Contribution
 This pipeline is a minimal example of using X. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
 
-## References
+## How to cite X
+
