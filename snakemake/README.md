@@ -26,3 +26,6 @@ Best practices workflows for snakemake can be found here: https://github.com/sna
 
 ## Notes and Contribution
 This pipeline is a minimal example of using snakemake. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+
+## How to cite Snakemake
+Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J., 2021. Sustainable data analysis with Snakemake. F1000Res 10, 33.
