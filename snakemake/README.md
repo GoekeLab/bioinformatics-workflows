@@ -1,3 +1,13 @@
+## About snakemake
+[snakemake](https://snakemake.readthedocs.io/en/stable/#) is a DSL workflow manager based on Python.
+
+## Training material and documentation
+- [snakemake tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
+- [snakemake documentation](https://snakemake.readthedocs.io/en/stable/index.html)
+
+## Community-developed workflows in snakemake
+Best practices workflows for snakemake can be found here: https://github.com/snakemake-workflows/docs
+
 ## Running the proof of concept Snakemake pipeline
 
 1. Install `snakemake` by following the instructions [here](https://snakemake.readthedocs.io/en/stable/)
@@ -13,3 +23,9 @@
     - `snakemake --cores [numcores] results/salmon/quant/ results/fastqc/`
     - For example, to run with 2 cores the command would be:
     - `snakemake --cores 2 results/salmon/quant/ results/fastqc/`
+
+## Notes and Contribution
+This pipeline is a minimal example of using snakemake. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+
+## How to cite Snakemake
+Mölder, F., Jablonski, K.P., Letcher, B., Hall, M.B., Tomkins-Tinch, C.H., Sochat, V., Forster, J., Lee, S., Twardziok, S.O., Kanitz, A., Wilm, A., Holtgrewe, M., Rahmann, S., Nahnsen, S., Köster, J., 2021. Sustainable data analysis with Snakemake. F1000Res 10, 33.

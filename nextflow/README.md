@@ -1,3 +1,13 @@
+## About nextflow
+Nextflow is a DSL workflow manager (https://www.nextflow.io/).
+
+## Training material and documentation
+- [nextflow tutorials](https://nf-co.re/usage/nextflow)
+- [nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
+
+## Community-developed workflows in nextflow
+The [nf-core projects](https://nf-co.re/) hosts community curated nextflow pipelines.
+
 ## Running the proof of concept Nextflow pipeline
 
 1. Install `nextflow` by following the instructions [here](https://www.nextflow.io/)
@@ -8,3 +18,8 @@
    - `nextflow run example.nf --ref ref.fasta[.gz] --left path/to/reads_1.fastq --right path/to/reads_2.fastq --outdir path/to/resultdir`
 5. Or run `nextflow run example.nf --help` for more information
 
+## Notes and Contribution
+This pipeline is a minimal example of using nextflow. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+
+## How to cite Nextflow
+Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316–319. doi:10.1038/nbt.3820
