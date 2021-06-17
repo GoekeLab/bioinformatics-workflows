@@ -1,0 +1,113 @@
+configfile: "config/config.yaml"
+
+include: "rules/common.smk"
+
+
+# Target rule collecting all desired output.
+# Here we make use of Snakemake's expand helper, which 
+# allows all kinds of aggregations over single or multiple
+# wildcards. If that is not enough, one can always fall back
+# to the full power of Python for performing arbitrarily 
+# complex aggregations.
+rule all:
+    input:
+        expand(
+            [
+                "results/fastqc/{sample}",
+                "results/salmon/quant/{sample}/quant.sf",
+                "results/plots/{sample}.tpm.svg",
+            ],
+            sample=config["samples"],
+        )
+
+
+# Obtain the transcriptome from Ensembl via a so-called Snakemake wrapper.
+# Wrappers are provided in a central community maintained repo for common 
+# tasks: https://snakemake-wrappers.readthedocs.io
+# (Actually, there are also wrappers for the steps below, but we keep them as 
+#  normal shell commands for illustration.)
+#
+# In addition this rule defines to be eligible for caching between workflows 
+# (cache: True). This ensures that this rule is executed only once, even 
+# across projects and users if a system/group/institute wide cache is set up:
+# https://snakemake.readthedocs.io/en/stable/executing/caching.html
+rule get_transcriptome:
+    output:
+        "resources/transcriptome.fasta"
+    params:
+        species=config["transcriptome"]["species"],
+        datatype="cdna",
+        build=config["transcriptome"]["build"],
+        release=config["transcriptome"]["release"]
+    log:
+        "logs/get-transcriptome.log"
+    cache: True
+    wrapper:
+        "v0.75.0/bio/reference/ensembl-sequence"
+
+
+# Perform quality control with FastQC.
+rule fastqc:
+    input:
+        get_fastqs
+    output:
+        directory("results/fastqc/{sample}")
+    log:
+        "logs/fastqc/{sample}.log"
+    conda:
+        "envs/fastqc.yaml"
+    params:
+        "--quiet --outdir"
+    shell:
+        "mkdir {output}; fastqc {input} {params} {output} 2> {log}"
+
+
+# Create reference transcriptome index using Salmon.
+rule salmon_index:
+    input:
+        "resources/transcriptome.fasta"
+    output:
+        directory("resources/salmon/index")
+    log:
+        "logs/salmon/index.log"
+    conda:
+        "envs/salmon.yaml"
+    cache: True
+    shell:
+        "salmon index -t {input} -i {output} 2> {log}"
+
+
+# Perform transcriptome alignment and quantification using Salmon.
+rule salmon_quant:
+    input:
+        index="resources/salmon/index",
+        reads=get_fastqs,
+    output:
+        "results/salmon/quant/{sample}/quant.sf"
+    log:
+        "logs/salmon/quant/{sample}.log"
+    params:
+        outdir=get_salmon_outdir
+    conda:
+        "envs/salmon.yaml"
+    threads: 2
+    shell:
+        "salmon quant -i {input.index} -l A -p {threads} "
+        "-1 {input.reads[0]} -2 {input.reads[1]} "
+        "--validateMappings -o {params.outdir}"
+
+
+# Plot a histogram of TPM values determined by salmon.
+# It uses Snakemake's notebook integration to allow initial interactive 
+# editing of the notebook, followed by automatic execution of the notebook
+# once it is finalized:
+# https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#jupyter-notebook-integration
+rule plot_tpm:
+    input:
+        "results/salmon/quant/{sample}/quant.sf"
+    output:
+        "results/plots/{sample}.tpm.svg"
+    conda:
+        "envs/stats.yaml"
+    notebook:
+        "notebooks/plot-tpm.py.ipynb"

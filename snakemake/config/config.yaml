@@ -1,0 +1,13 @@
+# in reality, you will often rather use a sample sheet for tabular metadata
+# e.g. with Snakemake's integration for PEP: https://snakemake.readthedocs.io/en/stable/snakefiles/configuration.html#configuring-scientific-experiments-via-peps
+
+samples:
+  a:
+    - data/reads_1.fastq
+    - data/reads_2.fastq
+
+
+transcriptome:
+  species: homo_sapiens
+  build: GRCh38
+  release: 100
