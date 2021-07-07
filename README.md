@@ -43,4 +43,9 @@ Workflow managers have many more features which are not used in these implementa
 - [Toil](https://toil.readthedocs.io/en/latest/)
 
 ## Contact and Call for Contribution
-Implementations were written by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
+This repository was created by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
+
+## Acknowledgements
+
+We would like to thank the following people for their contribution to this repository:
+- [Rob Patro](https://github.com/rob-p) for creating the RNA-Seq test data set
