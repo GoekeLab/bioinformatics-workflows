@@ -16,8 +16,7 @@ The RNA-Seq analysis workflow performs quality controls with fastqc and quantifi
 You can test the installation using the help function of the two tools (i.e. `salmon -h` and `fastqc -h`). 
    
 ## Test Data
-Installing `salmon` also installs a `sample_data` directory inside the `salmon` directory.
-The files `reads_1.fastq`, `reads_2.fastq` and `transcripts.fasta` are used as test data sets in these example implementations.
+This repository contains a [simulated test data set](test_data) which can be used to run the example implementations. The test data contains RNA-Seq reads ([reads_1.fq.gz](test_data/reads_1.fq.gz) and [reads_2.fq.gz](test_data/reads_2.fq.gz)), a transcriptome reference file ([transcriptome.fa](test_data/transcriptome.fa)) and the true counts from the simulation experiments ([truth.tsv](test_data/truth.tsv))
 
 ## Basic proof-of-concept implementations
 Each workflow manager folder in this repository has a README detailing how to run the proof-of-concept pipeline:
