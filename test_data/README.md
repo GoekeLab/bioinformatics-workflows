@@ -10,7 +10,7 @@ This folder contains a test data set for the RNA-Seq workflow.
 
 ## Test data generation
 
-The test data set was generated to represent by the following procedure (thanks to @rob-p):
+The test data set was simulted to represent a small set of genes in a human cell line RNA-Seq sample with the following procedure (thanks to [Rob Patro](https://github.com/rob-p)):
 
 1. The sample [ERR188297](https://www.ebi.ac.uk/ena/browser/view/ERR188297) was downloaded from ENA (this is an experimental sample from [GEUVADIS](https://www.ebi.ac.uk/ena/browser/view/PRJEB3366)).
 
@@ -22,7 +22,7 @@ The test data set was generated to represent by the following procedure (thanks 
 
 5. All transcripts from these genes were selected to generate the [test data transcriptome reference file](transcriptome.fa) (582 transcripts).
 
-6.The estimated transcript level counts were then used to simulate the test data with [polyester](https://bioconductor.org/packages/release/bioc/html/polyester.html) using `simulate_experiment_countmat`.
+6. The estimated transcript level counts were then used to simulate the test data with [polyester](https://bioconductor.org/packages/release/bioc/html/polyester.html) using `simulate_experiment_countmat`.
 
 7. The reads were shuffled (while maintaining the pairing) using [bbmap](https://sourceforge.net/projects/bbmap/).
 
