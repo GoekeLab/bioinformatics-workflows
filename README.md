@@ -16,8 +16,7 @@ The RNA-Seq analysis workflow performs quality controls with fastqc and quantifi
 You can test the installation using the help function of the two tools (i.e. `salmon -h` and `fastqc -h`). 
    
 ## Test Data
-Installing `salmon` also installs a `sample_data` directory inside the `salmon` directory.
-The files `reads_1.fastq`, `reads_2.fastq` and `transcripts.fasta` are used as test data sets in these example implementations.
+This repository contains a [simulated test data set](test_data) which can be used to run the example implementations. The test data contains RNA-Seq reads ([reads_1.fq.gz](test_data/reads_1.fq.gz) and [reads_2.fq.gz](test_data/reads_2.fq.gz)), a transcriptome reference file ([transcriptome.fa](test_data/transcriptome.fa)) and the true counts from the simulation experiments ([truth.tsv](test_data/truth.tsv))
 
 ## Basic proof-of-concept implementations
 Each workflow manager folder in this repository has a README detailing how to run the proof-of-concept pipeline:
@@ -44,4 +43,9 @@ Workflow managers have many more features which are not used in these implementa
 - [Toil](https://toil.readthedocs.io/en/latest/)
 
 ## Contact and Call for Contribution
-Implementations were written by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
+This repository was created by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
+
+## Acknowledgements
+
+We would like to thank the following people for their contribution to this repository:
+- [Rob Patro](https://github.com/rob-p) for creating the RNA-Seq test data set
