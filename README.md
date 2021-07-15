@@ -48,4 +48,5 @@ This repository was created by [Laura Wratten](https://github.com/lwratten). We 
 ## Acknowledgements
 
 We would like to thank the following people for their contribution to this repository:
-- [Rob Patro](https://github.com/rob-p) for creating the RNA-Seq test data set
+- [Rob Patro](https://github.com/rob-p) for creating the [RNA-Seq test data set](https://github.com/GoekeLab/bioinformatics-workflows/tree/master/test_data)
+- [Paolo Di Tommaso](https://github.com/pditommaso) for the [nextflow workflow](https://github.com/GoekeLab/bioinformatics-workflows/tree/master/nextflow)
