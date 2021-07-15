@@ -1,12 +1,16 @@
 ## About snakemake
 [snakemake](https://snakemake.github.io) is a workflow management system relying on a Python based DSL.
+Snakemake tries to make it as easy as possible to obtain workflows with maximum reproducibility, adaptability, and transparency.
+Importantly, Snakemake workflows are not limited to shell commands but can tightly integrate with custom scripts and Jupyter notebooks, as well as wrappers for common tasks.
+See the [official Snakemake paper](https://doi.org/10.12688/f1000research.29032.2) for a full overview.
 
 ## Training material and documentation
 - [snakemake tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html)
 - [snakemake documentation](https://snakemake.readthedocs.io)
 
 ## Community-developed workflows in snakemake
-Best practices workflows for snakemake can be found here: https://github.com/snakemake-workflows/docs
+A comprehensive catalog of Snakemake workflows can be found here [https://snakemake.github.io/snakemake-workflow-catalog].
+In particular, check out the "Standardized usage" category, and choose workflows that pass all QC criteria to get an impression of best practices.
 
 ## Running the proof of concept Snakemake pipeline
 
