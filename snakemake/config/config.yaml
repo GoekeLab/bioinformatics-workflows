@@ -3,8 +3,8 @@
 
 samples:
   a:
-    - data/reads_1.fastq
-    - data/reads_2.fastq
+    - ../test_data/reads_1.fq.gz
+    - ../test_data/reads_2.fq.gz
 
 
 transcriptome:
