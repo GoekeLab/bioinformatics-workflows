@@ -22,7 +22,9 @@ jobs:
 
     - name: Setup Nextflow
       run: |
+        cd nextflow
         curl -fsSL get.nextflow.io | bash
+        mv nextflow .. && cd ..
 
     - name: Tests
       run: |
