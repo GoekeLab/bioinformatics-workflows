@@ -17,7 +17,7 @@ jobs:
     - name: Setup Java
       uses: actions/setup-java@v1
       with:
-        java-version: ${{ matrix.java_version }}
+        java-version: 11
         architecture: x64
 
     - name: Setup Nextflow
