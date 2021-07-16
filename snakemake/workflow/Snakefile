@@ -75,7 +75,7 @@ rule salmon_index:
         "envs/salmon.yaml"
     cache: True
     shell:
-        "salmon index -t {input} -i {output} 2> {log}"
+        "salmon index -t {input} -i {output} &> {log}"
 
 
 # Perform transcriptome alignment and quantification using Salmon.
@@ -95,7 +95,7 @@ rule salmon_quant:
     shell:
         "salmon quant -i {input.index} -l A -p {threads} "
         "-1 {input.reads[0]} -2 {input.reads[1]} "
-        "--validateMappings -o {params.outdir}"
+        "--validateMappings -o {params.outdir} &> {log}"
 
 
 # Plot a histogram of TPM values determined by salmon.

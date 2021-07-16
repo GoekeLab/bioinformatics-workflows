@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Install snakefmt
+        run: |
+          pip install snakefmt
+
       - name: Formatting
-        uses: github/super-linter@v4.0.2
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_SNAKEMAKE_SNAKEFMT: true
+        run: |
+          cd snakemake
+          snakefmt --check workflow/Snakefile workflow/rules/*.smk
 
   Linting:
     runs-on: ubuntu-latest
@@ -27,7 +29,8 @@ jobs:
     - name: Lint workflow
       uses: snakemake/snakemake-github-action@v1.20.0
       with:
-        directory: snakemake
+        stagein: cd snakemake
+        directory: .
         snakefile: workflow/Snakefile
         args: "--lint"
 
@@ -42,6 +45,7 @@ jobs:
     - name: Test workflow
       uses: snakemake/snakemake-github-action@v1.20.0
       with:
-        directory: snakemake
+        stagein: cd snakemake
+        directory: .
         snakefile: workflow/Snakefile
         args: "--use-conda --show-failed-logs --cores 2 --conda-cleanup-pkgs cache"
