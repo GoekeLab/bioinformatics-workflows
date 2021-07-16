@@ -2,6 +2,7 @@
 [snakemake](https://snakemake.github.io) is a workflow management system relying on a Python based DSL.
 Snakemake tries to make it as easy as possible to obtain workflows with maximum reproducibility, adaptability, and transparency.
 Importantly, Snakemake workflows are not limited to shell commands but can tightly integrate with custom scripts and Jupyter notebooks, as well as wrappers for common tasks.
+Check out the pipeline code for [examples of the available functionality](https://github.com/GoekeLab/bioinformatics-workflows/blob/master/snakemake/workflow/Snakefile).
 See the [official Snakemake paper](https://doi.org/10.12688/f1000research.29032.2) for a full overview.
 
 ## Training material and documentation
