@@ -1,12 +1,12 @@
-## About nextflow
+## About Nextflow
 Nextflow is a DSL workflow manager (https://www.nextflow.io/).
 
 ## Training material and documentation
-- [nextflow tutorials](https://nf-co.re/usage/nextflow)
-- [nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
+- [Nextflow tutorials](https://nf-co.re/usage/nextflow)
+- [Nextflow documentation](https://www.nextflow.io/docs/latest/index.html)
 
-## Community-developed workflows in nextflow
-The [nf-core projects](https://nf-co.re/) hosts community curated nextflow pipelines.
+## Community-developed workflows in Nextflow
+The [nf-core projects](https://nf-co.re/) hosts community curated Nextflow pipelines.
 
 ## Running the proof of concept Nextflow pipeline
 
@@ -15,11 +15,19 @@ The [nf-core projects](https://nf-co.re/) hosts community curated nextflow pipel
    i.e.  `echo $PATH` and then `mv nextflow usr/bin`
 3. Navigate to the directory where you saved `example.nf`
 4. Run the pipeline with the following command:
-   - `nextflow run example.nf --ref ref.fasta[.gz] --left path/to/reads_1.fastq --right path/to/reads_2.fastq --outdir path/to/resultdir`
-5. Or run `nextflow run example.nf --help` for more information
+
+      ```
+      nextflow run nextflow/example.nf \
+            --left $PWD/test_data/reads_1.fq.gz \
+            --right $PWD/test_data/reads_2.fq.gz \
+            --ref $PWD/test_data/transcriptome.fa
+      ```
+5. Enable the use Docker containers adding the following option to the above command line: `-with-docker quay.io/nextflow/rnaseq-nf:v1.0`
+
+Note: input files requires the use of absolute paths
 
 ## Notes and Contribution
-This pipeline is a minimal example of using nextflow. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
+This pipeline is a minimal example of using Nextflow. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
 
 ## How to cite Nextflow
 Di Tommaso, P., Chatzou, M., Floden, E. W., Barja, P. P., Palumbo, E., & Notredame, C. (2017). Nextflow enables reproducible computational workflows. Nature Biotechnology, 35(4), 316–319. doi:10.1038/nbt.3820

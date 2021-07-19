@@ -1,0 +1,37 @@
+name: Test-Nextflow
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ masters ]
+
+
+jobs:
+
+  Testing:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+        architecture: x64
+
+    - name: Setup Nextflow
+      run: |
+        cd nextflow
+        curl -fsSL get.nextflow.io | bash
+        sudo mv nextflow /usr/local/bin && cd ..
+
+    - name: Tests
+      run: |
+        nextflow run nextflow/example.nf \
+            --left $PWD/test_data/reads_1.fq.gz \
+            --right $PWD/test_data/reads_2.fq.gz \
+            --ref $PWD/test_data/transcriptome.fa \
+            -with-docker quay.io/nextflow/rnaseq-nf:v1.0
+      env:
+        NXF_ANSI_LOG: false
