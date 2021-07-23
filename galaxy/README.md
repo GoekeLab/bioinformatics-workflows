@@ -20,7 +20,7 @@ A newer initiative exists that publishes best-practice production workflows to [
 ## Running the minimal proof-of-concept RNA-Seq Galaxy pipeline
 
 1. Register or login to your account on any Galaxy server, e.g [usegalaxy.org](https://usegalaxy.org)
-2. Open the [proof of concept workflow on dockstore](https://dockstore.org/workflows/github.com/mvdbeek/bioinformatics-workflows/salmon-proof-of-concept-galaxy:master?tab=info)
+2. Open the [proof-of-concept workflow on Dockstore](https://dockstore.org/workflows/github.com/mvdbeek/bioinformatics-workflows/salmon-proof-of-concept-galaxy:master?tab=info)
 3. Click on the "Launch with Galaxy" button and select a Galaxy server.
 4. Click on the workflow version you would like to import
 5. Click on the "Run Workflow" button
