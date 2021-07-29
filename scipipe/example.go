@@ -47,7 +47,7 @@ func main() {
 	// ----------------------------------------------------------------
 	// Transcriptome alignment and quantification using Salmon
 	// ----------------------------------------------------------------
-	salmonAlignQuant := wf.NewProc("salmon-aligh-quant", "salmon quant -i {i:index} -l A -1 '{i:left}' -2 '{i:right}' --validateMappings -o {o:quant}")
+	salmonAlignQuant := wf.NewProc("salmon-align-quant", "salmon quant -i {i:index} -l A -1 '{i:left}' -2 '{i:right}' --validateMappings -o {o:quant}")
 	salmonAlignQuant.In("index").From(salmonIndex.Out("index"))
 	salmonAlignQuant.In("left").From(leftSrc.Out())
 	salmonAlignQuant.In("right").From(rightSrc.Out())
