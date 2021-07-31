@@ -1,0 +1,30 @@
+name: Test-SciPipe
+
+on:
+  push:
+    branches: [ master, add-scipipe ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  Testing:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v2
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.16.6'
+
+    - name: Install bioinformatics tools
+      run: sudo apt-get install salmon fastqc -y
+
+    - name: Tests
+      run: |
+        cd scipipe && go run example.go \
+            -left $PWD/../test_data/reads_1.fq.gz \
+            -right $PWD/../test_data/reads_2.fq.gz \
+            -ref $PWD/../test_data/transcriptome.fa \
+            -outdir $PWD/results
