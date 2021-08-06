@@ -28,7 +28,7 @@ GenPipes comes with 13 validated and scalable pipelines for various genomics app
 
 ## Running the proof of concept GenPipes pipeline
 
-This proof of concept branch is implemented in the following [branch](https://bitbucket.org/mugqic/genpipes/src/goekelab_manuscript). 
+This proof of concept pipeline is implemented in the following [branch](https://bitbucket.org/mugqic/genpipes/src/goekelab_manuscript). 
 To run this proof of concept, you need to clone the repository and change to the appropriate branch. The location of the cloned directory
 will be referred to as `$GENPIPES` in the following instructions. 
 
