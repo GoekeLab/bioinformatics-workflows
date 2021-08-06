@@ -25,6 +25,7 @@ Each workflow manager folder in this repository has a README detailing how to ru
 - [Nextflow](nextflow)
 - [Snakemake](snakemake)
 - [WDL](wdl)
+- [GenPipes](genpipes)
 
 ## Online Documentation for Workflow managers
 Workflow managers have many more features which are not used in these implementations, and there are many additional workflow managers. You can read more about each workflow manager in their official documentation:

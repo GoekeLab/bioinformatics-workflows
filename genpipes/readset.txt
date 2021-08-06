@@ -1,0 +1,2 @@
+Sample	Readset	Library	RunType	Run	Lane	Adapter1	Adapter2	Primer1	Primer2	QualityOffset	BED	FASTQ1	FASTQ2	BAM
+test	test_reads	test_reads	PAIRED_END	0000	1					33		../test_data/reads_1.fastq	../test_data/reads_2.fastq	
