@@ -1,0 +1,26 @@
+- doc: Test for salmon-workflow.yml
+  job:
+    pe-fastq:
+      class: Collection
+      collection_type: 'list:paired'
+      elements:
+        - class: Collection
+          type: paired
+          identifier: the dataset
+          elements:
+          - identifier: forward
+            class: File
+            location: https://github.com/GoekeLab/bioinformatics-workflows/raw/master/test_data/reads_1.fq.gz
+          - identifier: reverse
+            class: File
+            location: https://github.com/GoekeLab/bioinformatics-workflows/raw/master/test_data/reads_2.fq.gz
+    transcript-fasta:
+      class: File
+      location: https://github.com/GoekeLab/bioinformatics-workflows/raw/master/test_data/transcriptome.fa
+  outputs:
+    salmon transcript quantification:
+      element_tests:
+        the dataset:
+          asserts:
+            has_text:
+              text: ENST00000075322.11

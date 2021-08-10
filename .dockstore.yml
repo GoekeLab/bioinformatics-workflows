@@ -1,0 +1,13 @@
+version: 1.2
+workflows:
+- name: salmon-proof-of-concept-galaxy
+  primaryDescriptorPath: /galaxy/salmon-workflow.ga
+  subclass: Galaxy
+  testParameterFiles:
+  - /galaxy/salmon-workflow-tests.yml
+  publish: true
+  authors:
+    - name: Laura Wratten
+      orcid: 0000-0003-4470-5785
+    - name: Marius van den Beek
+      orcid: 0000-0002-9676-7032

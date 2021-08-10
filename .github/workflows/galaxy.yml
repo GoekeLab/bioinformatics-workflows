@@ -1,0 +1,19 @@
+name: Test-Galaxy
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  Testing:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+    - name: Install planemo
+      run: pip install planemo wheel
+    - name: Run workflow test
+      run: planemo test --biocontainers galaxy/salmon-workflow.ga

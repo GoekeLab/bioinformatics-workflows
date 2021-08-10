@@ -1,19 +1,30 @@
 ## About Galaxy
-Galaxy is a web-based platform to develeop and execute bioinformatics workflows. Galaxy has extensive online documentation, a good place to get started is the [Galaxy 101](https://galaxyproject.org/tutorials/g101/)
+Galaxy is a web-based platform to develeop and execute bioinformatics workflows. Galaxy has extensive online documentation, a good place to get started is the [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)
 
 ## Training material and documentation
 - [training material](https://training.galaxyproject.org/training-material/) 
 - [documentation](https://docs.galaxyproject.org/en/master/)
 
 ## Community-developed workflows in Galaxy
-- https://usegalaxy.org/workflows/list_published
-- https://usegalaxy.eu/workflows/list_published
+
+Most workflows can be found on one of the large Galaxy instances:
+
+- [usegalaxy.org](https://usegalaxy.org/workflows/list_published)
+- [usegalaxy.eu](https://usegalaxy.eu/workflows/list_published)
+- [usegalaxy.org.au](https://usegalaxy.org.au/workflows/list_published)
+- [usegalaxy.be](https://usegalaxy.be/workflows/list_published)
+- [usegalaxy.fr](https://usegalaxy.fr/workflows/list_published)
+
+A newer initiative exists that publishes best-practice production workflows to [Dockstore](https://dockstore.org/organizations/iwc) and [WorkflowHub](https://workflowhub.eu/workflows?filter%5Bproject%5D=33&filter%5Bworkflow_type%5D=galaxy) to facilitate Workflow discovery across different Galaxy instances.
 
 ## Running the minimal proof-of-concept RNA-Seq Galaxy pipeline
 
-1. Register or login to your account on [Galaxy](https://usegalaxy.org)
-2. Open the [proof of concept workflow](https://usegalaxy.org.au/u/wrattenlaura/w/galaxy-proof-of-concept)
-3. Upload or provide a URL to the input data and run the pipeline using the GUI. Further details on uploading files [here](https://galaxyproject.org/tutorials/upload/)
+1. Register or login to your account on any Galaxy server, e.g [usegalaxy.org](https://usegalaxy.org)
+2. Open the [proof-of-concept workflow on Dockstore](https://dockstore.org/workflows/github.com/mvdbeek/bioinformatics-workflows/salmon-proof-of-concept-galaxy:master?tab=info)
+3. Click on the "Launch with Galaxy" button and select a Galaxy server.
+4. Click on the workflow version you would like to import
+5. Click on the "Run Workflow" button
+6. Upload or provide a URL to the input data and run the pipeline using the GUI. Further details on uploading files [here](https://galaxyproject.org/tutorials/upload/)
 
 ## Notes and Contribution
 This pipeline is a minimal example of using Galaxy. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
