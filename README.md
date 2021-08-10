@@ -19,14 +19,15 @@ You can test the installation using the help function of the two tools (i.e. `sa
 This repository contains a [simulated test data set](test_data) which can be used to run the example implementations. The test data contains RNA-Seq reads ([reads_1.fq.gz](test_data/reads_1.fq.gz) and [reads_2.fq.gz](test_data/reads_2.fq.gz)), a transcriptome reference file ([transcriptome.fa](test_data/transcriptome.fa)) and the true counts from the simulation experiments ([truth.tsv](test_data/truth.tsv))
 
 ## Basic proof-of-concept implementations
-Each workflow manager folder in this repository has a README detailing how to run the proof-of-concept pipeline:
+Each workflow manager folder in this repository has a README detailing how to run the proof-of-concept pipeline. Implementations that are contributed and reviewed by developers from these workflow management systems are marked with ⭐ (see [Acknowledgements](#acknowledgements)):
 
-- [Galaxy](galaxy)
-- [Nextflow](nextflow)
-- [Snakemake](snakemake)
-- [SciPipe](scipipe)
+- [Galaxy](galaxy) ⭐
+- [Nextflow](nextflow) ⭐
+- [Snakemake](snakemake) ⭐
+- [SciPipe](scipipe) ⭐
+- [GenPipes](genpipes) ⭐
 - [WDL](wdl)
-- [GenPipes](genpipes)
+
 
 ## Online Documentation for Workflow managers
 Workflow managers have many more features which are not used in these implementations, and there are many additional workflow managers. You can read more about each workflow manager in their official documentation:
@@ -54,3 +55,5 @@ We would like to thank the following people for their contribution to this repos
 - [Paolo Di Tommaso](https://github.com/pditommaso) for the [Nextflow workflow](nextflow)
 - [Johannes Köster](https://github.com/johanneskoester) for the [Snakemake workflow](snakemake)
 - [Samuel Lampa](https://github.com/samuell) for the [SciPipe workflow](scipipe)
+- [Marius van den Beek](https://github.com/mvdbeek) for the [Galaxy workflow](galaxy)
+- [José Héctor Gálvez López](https://github.com/pphector), Pierre-Olivier Quirion, Edouard Henrion, and Mathieu Bourgey for the [GenPipes workflow](genpipes)
