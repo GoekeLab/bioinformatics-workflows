@@ -24,6 +24,7 @@ Each workflow manager folder in this repository has a README detailing how to ru
 - [Galaxy](galaxy)
 - [Nextflow](nextflow)
 - [Snakemake](snakemake)
+- [SciPipe](scipipe)
 - [WDL](wdl)
 
 ## Online Documentation for Workflow managers
@@ -51,3 +52,4 @@ We would like to thank the following people for their contribution to this repos
 - [Rob Patro](https://github.com/rob-p) for creating the [RNA-Seq test data set](test_data)
 - [Paolo Di Tommaso](https://github.com/pditommaso) for the [Nextflow workflow](nextflow)
 - [Johannes Köster](https://github.com/johanneskoester) for the [Snakemake workflow](snakemake)
+- [Samuel Lampa](https://github.com/samuell) for the [SciPipe workflow](scipipe)
