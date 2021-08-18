@@ -36,6 +36,10 @@ task FastQC {
   output {
 	 File fastqc_res = "fastqc_res"
   }
+
+	runtime {
+		docker: "biocontainers/fastqc:v0.11.9_cv8"
+	}
 }
 
 task SalmonIndex {
@@ -50,6 +54,10 @@ task SalmonIndex {
   output {
 	 File index = "index"
   }
+
+	runtime {
+		docker: "salmon_docker_image_goes_here"
+	}
 }
 
 task SalmonAlignQuant {
@@ -66,6 +74,10 @@ task SalmonAlignQuant {
   output {
 	 File quant = "quant"
   }
+
+	runtime {
+		docker: "salmon_docker_image_goes_here"
+	}
 }
 
 
