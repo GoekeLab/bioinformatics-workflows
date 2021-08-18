@@ -1,0 +1,5 @@
+{
+  "wdl_poc.reads1": "data/reads_1.fastq",
+  "wdl_poc.reads2": "data/reads_2.fastq",
+  "wdl_poc.ref_txome": "data/transcripts.fasta"
+}
