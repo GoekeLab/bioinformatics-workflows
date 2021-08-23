@@ -6,10 +6,13 @@ workflow wdl_poc {
      File reads2
      File ref_txome
    }
-   call FastQC {
+   call FastQCOne {
       input:
-         reads1 = reads1,
-         reads2 = reads2,
+         reads = reads1,
+   }
+   call FastQCTwo {
+      input:
+         reads = reads2,
    }
    call SalmonIndex {
      input:
@@ -23,18 +26,35 @@ workflow wdl_poc {
   }
 }
 
-task FastQC {
+task FastQCOne {
   input {
-     File reads1
-     File reads2
+     File reads
   }
 
   command {
-     mkdir fastqc_res; fastqc --quiet "${reads1}" "${reads2}" --outdir fastqc_res
+    cat "${reads}" | fastqc stdin:reads
   }
 
   output {
-	 File fastqc_res = "fastqc_res"
+	 File fastqc_res = "reads_fastqc.html"
+  }
+
+	runtime {
+		docker: "biocontainers/fastqc:v0.11.9_cv8"
+	}
+}
+
+task FastQCTwo {
+  input {
+     File reads
+  }
+
+  command {
+    cat "${reads}" | fastqc stdin:reads
+  }
+
+  output {
+	 File fastqc_res = "reads_fastqc.html"
   }
 
 	runtime {
@@ -56,7 +76,7 @@ task SalmonIndex {
   }
 
 	runtime {
-		docker: "salmon_docker_image_goes_here"
+		docker: "docker.io/combinelab/salmon:latest"
 	}
 }
 
