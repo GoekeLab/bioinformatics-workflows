@@ -68,7 +68,7 @@ task SalmonIndex {
   }
 
   command {
-     salmon index -t "${ref_txome}" -i index
+     cat > index; salmon index -t "${ref_txome}" -i index
   }
 
   output {
@@ -76,7 +76,7 @@ task SalmonIndex {
   }
 
 	runtime {
-		docker: "docker.io/combinelab/salmon:latest"
+		docker: "docker.io/combinelab/salmon:1.5.2"
 	}
 }
 
@@ -88,7 +88,7 @@ task SalmonAlignQuant {
   }
 
   command {
-     salmon quant -i "${index}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant
+     cat > quant; salmon quant -i "${index}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant
   }
 
   output {
@@ -96,7 +96,7 @@ task SalmonAlignQuant {
   }
 
 	runtime {
-		docker: "salmon_docker_image_goes_here"
+		docker: "docker.io/combinelab/salmon:1.5.2"
 	}
 }
 
