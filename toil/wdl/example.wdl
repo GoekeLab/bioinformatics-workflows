@@ -58,14 +58,15 @@ task FastQCtwo {
 task SalmonIndex {
   input {
      File ref_txome
+     String index = "index"
   }
 
   command {
-     salmon index -t "${ref_txome}" -i index
+     salmon index -t "${ref_txome}" -i ${index}; tar -cvzf index.tar.gz ${index}
   }
 
   output {
-	 File index = "index"
+	 File index = "index.tar.gz"
   }
 }
 
@@ -74,14 +75,18 @@ task SalmonAlignQuant {
 	 File reads1
 	 File reads2
      File index
+     String indexdir = "index"
+     String quantex = "quant"
   }
 
   command {
-     salmon quant -i "${index}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant
+     tar -xzf ${index};
+     salmon quant -i "${indexdir}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant;
+     tar -cvzf quant.tar.gz ${quantex}
   }
 
   output {
-	 File quant = "quant"
+	 File quant = "quant.tar.gz"
   }
 }
 

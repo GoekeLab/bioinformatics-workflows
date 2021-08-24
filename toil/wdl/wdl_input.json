@@ -1,5 +1,5 @@
 {
-  "wdl_poc.reads1": "/home/hexotical/bioinformatics-workflows/test_data/reads_1.fq",
-  "wdl_poc.reads2": "/home/hexotical/bioinformatics-workflows/test_data/reads_2.fq",
+  "wdl_poc.reads1": "/home/hexotical/bioinformatics-workflows/test_data/reads_1.fq.gz",
+  "wdl_poc.reads2": "/home/hexotical/bioinformatics-workflows/test_data/reads_2.fq.gz",
   "wdl_poc.ref_txome": "/home/hexotical/bioinformatics-workflows/test_data/transcriptome.fa"
 }
