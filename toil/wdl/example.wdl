@@ -6,11 +6,11 @@ workflow wdl_poc {
      File reads2
      File ref_txome
    }
-   call FastQCOne {
+   call FastQCone {
       input:
          reads = reads1,
    }
-   call FastQCTwo {
+   call FastQCtwo {
       input:
          reads = reads2,
    }
@@ -26,41 +26,34 @@ workflow wdl_poc {
   }
 }
 
-task FastQCOne {
+task FastQCone {
   input {
      File reads
   }
 
   command {
-    cat "${reads}" | fastqc stdin:reads
+     zcat "${reads}" | fastqc stdin:readsone
   }
 
   output {
-	 File fastqc_res = "reads_fastqc.html"
+	 File fastqc_res = "readsone_fastqc.html"
   }
-
-	runtime {
-		docker: "biocontainers/fastqc:v0.11.9_cv8"
-	}
 }
 
-task FastQCTwo {
+task FastQCtwo {
   input {
      File reads
   }
 
   command {
-    cat "${reads}" | fastqc stdin:reads
+     zcat "${reads}" | fastqc stdin:readstwo
   }
 
   output {
-	 File fastqc_res = "reads_fastqc.html"
+	 File fastqc_res = "readstwo_fastqc.html"
   }
-
-	runtime {
-		docker: "biocontainers/fastqc:v0.11.9_cv8"
-	}
 }
+
 
 task SalmonIndex {
   input {
@@ -68,16 +61,12 @@ task SalmonIndex {
   }
 
   command {
-     cat > index; salmon index -t "${ref_txome}" -i index
+     salmon index -t "${ref_txome}" -i index
   }
 
   output {
 	 File index = "index"
   }
-
-	runtime {
-		docker: "docker.io/combinelab/salmon:1.5.2"
-	}
 }
 
 task SalmonAlignQuant {
@@ -88,16 +77,12 @@ task SalmonAlignQuant {
   }
 
   command {
-     cat > quant; salmon quant -i "${index}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant
+     salmon quant -i "${index}" -l A -1 "${reads1}" -2 "${reads2}" --validateMappings -o quant
   }
 
   output {
 	 File quant = "quant"
   }
-
-	runtime {
-		docker: "docker.io/combinelab/salmon:1.5.2"
-	}
 }
 
 
