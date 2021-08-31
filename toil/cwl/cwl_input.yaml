@@ -1,0 +1,14 @@
+index: salmon_index
+quant: quant
+libtype: A
+fqOne: 
+  class: File
+  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/reads_1.fq
+  format: http://edamontology.org/format_1930
+fqTwo: 
+  class: File
+  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/reads_2.fq
+  format: http://edamontology.org/format_1930
+transcriptome:
+  class: File
+  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/transcriptome.fa
