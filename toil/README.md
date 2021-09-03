@@ -56,5 +56,6 @@ Docker isn't a necessity however we offer the option of using docker to increase
 ## Notes and Contribution
 This pipeline is a minimal example of using Toil. We welcome contributions to the documentation and workflow, please create an issue or submit a pull request!
 
-## How to cite X
+## How to cite Toil
+Vivian, J., Rao, A. A., Nothaft, F. A., Ketchum, C., Armstrong, J., Novak, A., … Paten, B. (2017). Toil enables reproducible, open source, big biomedical data analyses. Nature Biotechnology, 35(4), 314–316. http://doi.org/10.1038/nbt.3772
 
