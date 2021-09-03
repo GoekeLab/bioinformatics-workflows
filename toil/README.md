@@ -23,7 +23,7 @@ Add description and links to community-developed pipelines.
 
 1. Install Toil by following the instructions listed [here](https://toil.readthedocs.io/en/latest/gettingStarted/install.html)
 
-2. (Optional) Install Docker by following the instructions listed [here](https://docs.docker.com/get-docker/)
+2. Install Docker by following the instructions listed [here](https://docs.docker.com/get-docker/)
 Docker isn't a necessity however we offer the option of using docker to increase the portability of the workflows
 
 # WDL
