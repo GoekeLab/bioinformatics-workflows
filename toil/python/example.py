@@ -45,6 +45,8 @@ if __name__=="__main__":
     options.logLevel = "DEBUG"
     options.clean = "always"
 
+    salmonIndex.addChild(salmonQuant) # We add a child to ensure that the necessary files exist
+
     with Toil(options) as toil:
         toil.start(fastQCone)
         toil.start(salmonIndex)

@@ -38,6 +38,10 @@ task FastQCone {
   output {
 	 File fastqc_res = "readsone_fastqc.html"
   }
+  
+  runtime {
+     docker: 'pegi3s/fastqc'
+  }
 }
 
 task FastQCtwo {
@@ -51,6 +55,10 @@ task FastQCtwo {
 
   output {
 	 File fastqc_res = "readstwo_fastqc.html"
+  }
+
+  runtime {
+     docker: 'pegi3s/fastqc'
   }
 }
 
@@ -67,6 +75,10 @@ task SalmonIndex {
 
   output {
 	 File index = "index.tar.gz"
+  }
+  
+  runtime {
+     docker: 'combinelab/salmon'
   }
 }
 
@@ -87,6 +99,10 @@ task SalmonAlignQuant {
 
   output {
 	 File quant = "quant.tar.gz"
+  }
+
+  runtime {
+     docker: 'combinelab/salmon'
   }
 }
 
