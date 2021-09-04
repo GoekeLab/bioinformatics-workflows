@@ -29,6 +29,13 @@ bpipe run -r --env torque  quantify_rna.groovy  ../test_data/*.fq.gz
 This example only uses very simple features of Bpipe. Bpipe has many more features
 which you can explore in the [documentation](http://docs.bpipe/org).
 
+Other useful commands to experiment with are:
+
+- `bpipe log` (see logs of a running pipeline)
+- `bpipe stop` (stop a running pipeline)
+- `bpipe history` (show history)
+
+
 Thanks for trying out the Bpipe example!
 
 
