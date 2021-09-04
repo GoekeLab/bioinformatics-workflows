@@ -15,7 +15,10 @@ and then execute from within the bpipe directory:
 bpipe run quantify_rna.groovy  ../test_data/*.fq.gz
 ```
 
-Please note the default configuration will run the commands on the local computer. It is easy
+**Note**: please make sure to use Bpipe 0.9.11 or higher for running the example.
+
+Please note the default configuration will run the commands on the local computer, and it 
+assumes that salmon and fastqc are available in the PATH. It is easy
 to configure Bpipe for other environments, and an example is shown in the 
 [bpipe.config](bpipe.config) file which illustrates how to configure it to run using
 PBS Torque. To run the Torque version you can tell Bpipe to use the alternative environment like
@@ -32,7 +35,7 @@ bpipe run -r --env torque  quantify_rna.groovy  ../test_data/*.fq.gz
 ```
 
 This example only uses very simple features of Bpipe. Bpipe has many more features
-which you can explore in the [documentation](http://docs.bpipe/org).
+which you can explore in the [documentation](http://docs.bpipe.org).
 
 Other useful commands to experiment with are:
 
