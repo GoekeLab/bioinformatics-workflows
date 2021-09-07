@@ -435,9 +435,9 @@ if __name__ == "__main__":
     pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
     with Toil(options) as fileStore:
-        reads1 = fileStore.importFile(os.path.join(pkg_root, "test_data/reads_1.fq.gz"))
-        reads2 = fileStore.importFile(os.path.join(pkg_root, "test_data/reads_2.fq.gz"))
-        ref_txome = fileStore.importFile(os.path.join(pkg_root, "test_data/transcriptome.fa"))
+        reads1 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_1.fq.gz"))
+        reads2 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_2.fq.gz"))
+        ref_txome = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/transcriptome.fa"))
 
         FastQCone = FastQConeCls(reads=reads1)
         fastqc_output_report_path = FastQCone.rv("fastqc_res")
