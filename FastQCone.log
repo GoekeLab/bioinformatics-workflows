@@ -1,0 +1,4 @@
+Analysis complete for stdin:readsone
+gzip: /tmp/1b17d1d4112a56ec8ac6a1cdc345c51e/1b02/256c/tmpuc2swpcw/reads_1.fq.gz: No such file or directory
+Picked up _JAVA_OPTIONS: -Djava.io.tmpdir=//tmp/1b17d1d4112a56ec8ac6a1cdc345c51e/1b02/256c/tmpuc2swpcw/execution/tmp.RGY3Vu
+Started analysis of stdin:readsone
