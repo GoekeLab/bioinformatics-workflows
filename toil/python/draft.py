@@ -59,209 +59,171 @@ class FastQConeCls(Job):
         return {"fastqc_output_path": fastqc_output_path}
 
 
-# class FastQCtwoCls(Job):
-#     def __init__(self, reads=None, *args, **kwargs):
-#         super(FastQCtwoCls, self).__init__(*args, **kwargs)
-#         Job.__init__(self)
-#
-#         self.id_reads = reads
-#
-#     def run(self, fileStore):
-#         fileStore.logToMaster("FastQCtwo")
-#         tempDir = fileStore.getLocalTempDir()
-#
-#         _toil_wdl_internal__stdout_file = os.path.join(tempDir, 'stdout')
-#         _toil_wdl_internal__stderr_file = os.path.join(tempDir, 'stderr')
-#
-#         try:
-#             os.makedirs(os.path.join(tempDir, 'execution'))
-#         except OSError as e:
-#             if e.errno != errno.EEXIST:
-#                 raise
-#
-#         reads = process_and_read_file(abspath_file(self.id_reads, current_working_dir), tempDir,
-#                                       fileStore, docker=True)
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command3 = r'''
-#              zcat "'''
-#         except:
-#             command3 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command4 = str(
-#                 reads if not isinstance(reads, WDLFile) else process_and_read_file(reads, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command4 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command5 = r'''" | fastqc stdin:readstwo
-#           '''
-#         except:
-#             command5 = ''
-#
-#         cmd = command3 + command4 + command5
-#         cmd = textwrap.dedent(cmd.strip("\n"))
-#         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='FastQCtwo')
-#
-#         # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
-#         _toil_wdl_internal__stdout, _toil_wdl_internal__stderr = \
-#             apiDockerCall(self,
-#                           image='pegi3s/fastqc',
-#                           working_dir=tempDir,
-#                           parameters=[os.path.join(tempDir, "FastQCtwo_script.sh")],
-#                           entrypoint="/bin/bash",
-#                           user='root',
-#                           stderr=True,
-#                           demux=True,
-#                           volumes={tempDir: {"bind": tempDir}})
-#         with open(os.path.join(current_working_dir, 'FastQCtwo.log'), 'wb') as f:
-#             if _toil_wdl_internal__stdout:
-#                 f.write(_toil_wdl_internal__stdout)
-#             if _toil_wdl_internal__stderr:
-#                 f.write(_toil_wdl_internal__stderr)
-#
-#         _toil_wdl_internal__stdout_file = generate_stdout_file(_toil_wdl_internal__stdout,
-#                                                                tempDir,
-#                                                                fileStore=fileStore)
-#         _toil_wdl_internal__stderr_file = generate_stdout_file(_toil_wdl_internal__stderr,
-#                                                                tempDir,
-#                                                                fileStore=fileStore,
-#                                                                stderr=True)
-#
-#         fastqc_res = WDLFileType().create(
-#             'readstwo_fastqc.html', output=True)
-#         fastqc_res = process_outfile(fastqc_res, fileStore, tempDir, '/home/quokka/git/bioinformatics-workflows')
-#
-#         rvDict = {"fastqc_res": fastqc_res}
-#         return rvDict
-#
-#
-# class SalmonIndexCls(Job):
-#     def __init__(self, ref_txome=None, index="", *args, **kwargs):
-#         super(SalmonIndexCls, self).__init__(*args, **kwargs)
-#         Job.__init__(self)
-#
-#         self.id_ref_txome = ref_txome
-#         self.id_index = WDLStringType().create(
-#             'index')
-#
-#     def run(self, fileStore):
-#         fileStore.logToMaster("SalmonIndex")
-#         tempDir = fileStore.getLocalTempDir()
-#
-#         _toil_wdl_internal__stdout_file = os.path.join(tempDir, 'stdout')
-#         _toil_wdl_internal__stderr_file = os.path.join(tempDir, 'stderr')
-#
-#         try:
-#             os.makedirs(os.path.join(tempDir, 'execution'))
-#         except OSError as e:
-#             if e.errno != errno.EEXIST:
-#                 raise
-#
-#         ref_txome = process_and_read_file(abspath_file(self.id_ref_txome, current_working_dir),
-#                                           tempDir, fileStore, docker=True)
-#         index = self.id_index
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command6 = r'''
-#              salmon index -t "'''
-#         except:
-#             command6 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command7 = str(
-#                 ref_txome if not isinstance(ref_txome, WDLFile) else process_and_read_file(ref_txome, tempDir,
-#                                                                                            fileStore)).strip("\n")
-#         except:
-#             command7 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command8 = r'''" -i '''
-#         except:
-#             command8 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command9 = str(
-#                 index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command9 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command10 = r'''; tar -cvzf index.tar.gz '''
-#         except:
-#             command10 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command11 = str(
-#                 index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command11 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command12 = r'''
-#           '''
-#         except:
-#             command12 = ''
-#
-#         cmd = command6 + command7 + command8 + command9 + command10 + command11 + command12
-#         cmd = textwrap.dedent(cmd.strip("\n"))
-#         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='SalmonIndex')
-#
-#         # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
-#         _toil_wdl_internal__stdout, _toil_wdl_internal__stderr = \
-#             apiDockerCall(self,
-#                           image='combinelab/salmon',
-#                           working_dir=tempDir,
-#                           parameters=[os.path.join(tempDir, "SalmonIndex_script.sh")],
-#                           entrypoint="/bin/bash",
-#                           user='root',
-#                           stderr=True,
-#                           demux=True,
-#                           volumes={tempDir: {"bind": tempDir}})
-#         with open(os.path.join(current_working_dir, 'SalmonIndex.log'), 'wb') as f:
-#             if _toil_wdl_internal__stdout:
-#                 f.write(_toil_wdl_internal__stdout)
-#             if _toil_wdl_internal__stderr:
-#                 f.write(_toil_wdl_internal__stderr)
-#
-#         _toil_wdl_internal__stdout_file = generate_stdout_file(_toil_wdl_internal__stdout,
-#                                                                tempDir,
-#                                                                fileStore=fileStore)
-#         _toil_wdl_internal__stderr_file = generate_stdout_file(_toil_wdl_internal__stderr,
-#                                                                tempDir,
-#                                                                fileStore=fileStore,
-#                                                                stderr=True)
-#
-#         index = WDLFileType().create(
-#             'index.tar.gz', output=True)
-#         index = process_outfile(index, fileStore, tempDir, '/home/quokka/git/bioinformatics-workflows')
-#
-#         rvDict = {"index": index}
-#         return rvDict
+class FastQCtwoCls(Job):
+    def __init__(self, reads=None, *args, **kwargs):
+        super(FastQCtwoCls, self).__init__(*args, **kwargs)
+        Job.__init__(self)
+
+        self.reads = reads
+
+    def run(self, fileStore):
+        fileStore.logToMaster("FastQCtwo")
+        tempDir = fileStore.getLocalTempDir()
+
+        try:
+            os.makedirs(os.path.join(tempDir, 'execution'))
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+        fpath = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+        cmd = f'zcat "{fpath}" | fastqc stdin:readstwo'
+
+        generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='FastQCtwo')
+
+        # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
+        stdout, stderr = \
+            apiDockerCall(self,
+                          image='pegi3s/fastqc',
+                          working_dir=tempDir,
+                          parameters=[os.path.join(tempDir, "FastQCtwo_script.sh")],
+                          entrypoint="/bin/bash",
+                          user='root',
+                          stderr=True,
+                          demux=True,
+                          volumes={tempDir: {"bind": tempDir}})
+
+        with open(os.path.join(current_working_dir, 'FastQCtwo.log'), 'wb') as f:
+            if stdout:
+                f.write(stdout)
+            if stderr:
+                f.write(stderr)
+
+        output_file_id = fileStore.writeGlobalFile(os.path.join(tempDir, 'execution', 'readstwo_fastqc.html'))
+        fastqc_output_path = os.path.join(os.path.abspath(current_working_dir), 'readstwo_fastqc.html')
+        fileStore.exportFile(output_file_id, f'file://{fastqc_output_path}')
+
+        return {"fastqc_output_path": fastqc_output_path}
+
+
+class SalmonIndexCls(Job):
+    def __init__(self, ref_txome=None, index="", *args, **kwargs):
+        super(SalmonIndexCls, self).__init__(*args, **kwargs)
+        Job.__init__(self)
+
+        self.id_ref_txome = ref_txome
+        self.id_index = WDLStringType().create(
+            'index')
+
+    def run(self, fileStore):
+        fileStore.logToMaster("SalmonIndex")
+        tempDir = fileStore.getLocalTempDir()
+
+        _toil_wdl_internal__stdout_file = os.path.join(tempDir, 'stdout')
+        _toil_wdl_internal__stderr_file = os.path.join(tempDir, 'stderr')
+
+        try:
+            os.makedirs(os.path.join(tempDir, 'execution'))
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+
+        ref_txome = process_and_read_file(abspath_file(self.id_ref_txome, current_working_dir),
+                                          tempDir, fileStore, docker=True)
+        index = self.id_index
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command6 = r'''
+             salmon index -t "'''
+        except:
+            command6 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command7 = str(
+                ref_txome if not isinstance(ref_txome, WDLFile) else process_and_read_file(ref_txome, tempDir,
+                                                                                           fileStore)).strip("\n")
+        except:
+            command7 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command8 = r'''" -i '''
+        except:
+            command8 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command9 = str(
+                index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
+                "\n")
+        except:
+            command9 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command10 = r'''; tar -cvzf index.tar.gz '''
+        except:
+            command10 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command11 = str(
+                index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
+                "\n")
+        except:
+            command11 = ''
+
+        try:
+            # Intended to deal with "optional" inputs that may not exist
+            # TODO: handle this better
+            command12 = r'''
+          '''
+        except:
+            command12 = ''
+
+        cmd = command6 + command7 + command8 + command9 + command10 + command11 + command12
+        cmd = textwrap.dedent(cmd.strip("\n"))
+        generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='SalmonIndex')
+
+        # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
+        _toil_wdl_internal__stdout, _toil_wdl_internal__stderr = \
+            apiDockerCall(self,
+                          image='combinelab/salmon',
+                          working_dir=tempDir,
+                          parameters=[os.path.join(tempDir, "SalmonIndex_script.sh")],
+                          entrypoint="/bin/bash",
+                          user='root',
+                          stderr=True,
+                          demux=True,
+                          volumes={tempDir: {"bind": tempDir}})
+        with open(os.path.join(current_working_dir, 'SalmonIndex.log'), 'wb') as f:
+            if _toil_wdl_internal__stdout:
+                f.write(_toil_wdl_internal__stdout)
+            if _toil_wdl_internal__stderr:
+                f.write(_toil_wdl_internal__stderr)
+
+        _toil_wdl_internal__stdout_file = generate_stdout_file(_toil_wdl_internal__stdout,
+                                                               tempDir,
+                                                               fileStore=fileStore)
+        _toil_wdl_internal__stderr_file = generate_stdout_file(_toil_wdl_internal__stderr,
+                                                               tempDir,
+                                                               fileStore=fileStore,
+                                                               stderr=True)
+
+        index = WDLFileType().create(
+            'index.tar.gz', output=True)
+        index = process_outfile(index, fileStore, tempDir, '/home/quokka/git/bioinformatics-workflows')
+
+        rvDict = {"index": index}
+        return rvDict
 #
 #
 # class SalmonAlignQuantCls(Job):
@@ -442,8 +404,9 @@ if __name__ == "__main__":
         FastQCone = FastQConeCls(reads=reads1)
         fastqc_output_report_path = FastQCone.rv("fastqc_res")
 
-        # FastQCtwo = job0.addChild(FastQCtwoCls(reads=reads2))
-        # FastQCtwo_fastqc_res = FastQCtwo.rv("fastqc_res")
+        FastQCtwo = FastQCtwoCls(reads=reads2)
+        FastQCtwo_fastqc_res = FastQCtwo.rv("fastqc_res")
+        FastQCone.addChild(FastQCtwo)
         #
         # SalmonIndex = job0.addChild(SalmonIndexCls(ref_txome=ref_txome))
         # SalmonIndex_index = SalmonIndex.rv("index")
