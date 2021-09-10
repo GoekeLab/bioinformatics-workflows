@@ -242,8 +242,8 @@ if __name__ == "__main__":
         fastqc_job_1.addChild(salmon_index_job)  # salmon_index_job will run after our root job
 
         salmon_align_quant_job = SalmonAlignQuantCls(reads1=reads1_file_id, reads2=reads2_file_id, index=index_file_id)
-        fastqc_job_1.addFollowOn(salmon_align_quant_job)
-        # we don't do anything our results, but we could
+        fastqc_job_1.addFollowOn(salmon_align_quant_job)  # run after this job and all of its children
+        # we don't do anything with our results, but we could
         salmon_align_quant_file_id = salmon_align_quant_job.rv("quant")
 
         fileStore.start(fastqc_job_1)
