@@ -1,6 +1,7 @@
 import os
 import errno
 import logging
+from toil import customDockerInitCmd
 
 from toil.job import Job
 from toil.common import Toil
@@ -154,170 +155,63 @@ class SalmonIndexCls(Job):
 
         
         return {"index_output_path" : index_output_path}
-#
-#
-# class SalmonAlignQuantCls(Job):
-#     def __init__(self, reads1=None, reads2=None, index=None, indexdir="", quantex="", *args, **kwargs):
-#         super(SalmonAlignQuantCls, self).__init__(*args, **kwargs)
-#         Job.__init__(self)
-#
-#         self.id_reads1 = reads1
-#         self.id_reads2 = reads2
-#         self.id_index = index
-#         self.id_indexdir = WDLStringType().create(
-#             'index')
-#         self.id_quantex = WDLStringType().create(
-#             'quant')
-#
-#     def run(self, fileStore):
-#         fileStore.logToMaster("SalmonAlignQuant")
-#         tempDir = fileStore.getLocalTempDir()
-#
-#         _toil_wdl_internal__stdout_file = os.path.join(tempDir, 'stdout')
-#         _toil_wdl_internal__stderr_file = os.path.join(tempDir, 'stderr')
-#
-#         try:
-#             os.makedirs(os.path.join(tempDir, 'execution'))
-#         except OSError as e:
-#             if e.errno != errno.EEXIST:
-#                 raise
-#
-#         reads1 = process_and_read_file(abspath_file(self.id_reads1, current_working_dir), tempDir,
-#                                        fileStore, docker=True)
-#         reads2 = process_and_read_file(abspath_file(self.id_reads2, current_working_dir), tempDir,
-#                                        fileStore, docker=True)
-#         index = process_and_read_file(abspath_file(self.id_index, current_working_dir), tempDir,
-#                                       fileStore, docker=True)
-#         indexdir = self.id_indexdir
-#         quantex = self.id_quantex
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command13 = r'''
-#              tar -xzf '''
-#         except:
-#             command13 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command14 = str(
-#                 index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command14 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command15 = r''';
-#              salmon quant -i "'''
-#         except:
-#             command15 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command16 = str(indexdir if not isinstance(indexdir, WDLFile) else process_and_read_file(indexdir, tempDir,
-#                                                                                                      fileStore)).strip(
-#                 "\n")
-#         except:
-#             command16 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command17 = r'''" -l A -1 "'''
-#         except:
-#             command17 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command18 = str(
-#                 reads1 if not isinstance(reads1, WDLFile) else process_and_read_file(reads1, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command18 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command19 = r'''" -2 "'''
-#         except:
-#             command19 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command20 = str(
-#                 reads2 if not isinstance(reads2, WDLFile) else process_and_read_file(reads2, tempDir, fileStore)).strip(
-#                 "\n")
-#         except:
-#             command20 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command21 = r'''" --validateMappings -o quant;
-#              tar -cvzf quant.tar.gz '''
-#         except:
-#             command21 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command22 = str(quantex if not isinstance(quantex, WDLFile) else process_and_read_file(quantex, tempDir,
-#                                                                                                    fileStore)).strip(
-#                 "\n")
-#         except:
-#             command22 = ''
-#
-#         try:
-#             # Intended to deal with "optional" inputs that may not exist
-#             # TODO: handle this better
-#             command23 = r'''
-#           '''
-#         except:
-#             command23 = ''
-#
-#         cmd = command13 + command14 + command15 + command16 + command17 + command18 + command19 + command20 + command21 + command22 + command23
-#         cmd = textwrap.dedent(cmd.strip("\n"))
-#         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd,
-#                                         job_name='SalmonAlignQuant')
-#
-#         # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
-#         _toil_wdl_internal__stdout, _toil_wdl_internal__stderr = \
-#             apiDockerCall(self,
-#                           image='combinelab/salmon',
-#                           working_dir=tempDir,
-#                           parameters=[os.path.join(tempDir, "SalmonAlignQuant_script.sh")],
-#                           entrypoint="/bin/bash",
-#                           user='root',
-#                           stderr=True,
-#                           demux=True,
-#                           volumes={tempDir: {"bind": tempDir}})
-#         with open(os.path.join(current_working_dir, 'SalmonAlignQuant.log'), 'wb') as f:
-#             if _toil_wdl_internal__stdout:
-#                 f.write(_toil_wdl_internal__stdout)
-#             if _toil_wdl_internal__stderr:
-#                 f.write(_toil_wdl_internal__stderr)
-#
-#         _toil_wdl_internal__stdout_file = generate_stdout_file(_toil_wdl_internal__stdout,
-#                                                                tempDir,
-#                                                                fileStore=fileStore)
-#         _toil_wdl_internal__stderr_file = generate_stdout_file(_toil_wdl_internal__stderr,
-#                                                                tempDir,
-#                                                                fileStore=fileStore,
-#                                                                stderr=True)
-#
-#         quant = WDLFileType().create(
-#             'quant.tar.gz', output=True)
-#         quant = process_outfile(quant, fileStore, tempDir, '/home/quokka/git/bioinformatics-workflows')
-#
-#         rvDict = {"quant": quant}
-#         return rvDict
+
+
+class SalmonAlignQuantCls(Job):
+    def __init__(self, reads1=None, reads2=None, index=None, indexdir="", quantex="", *args, **kwargs):
+        super(SalmonAlignQuantCls, self).__init__(*args, **kwargs)
+        Job.__init__(self)
+
+        self.reads1 = reads1
+        self.reads2 = reads2
+        self.index = index
+        self.indexdir = indexdir
+        self.quantex = quantex
+
+    def run(self, fileStore):
+        fileStore.logToMaster("SalmonAlignQuant")
+        tempDir = fileStore.getLocalTempDir()
+
+        try:
+            os.makedirs(os.path.join(tempDir, 'execution'))
+        except OSError as e:
+            if e.errno != errno.EEXIST:
+                raise
+        
+        fpath_reads1 = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+
+        fpath_reads2 = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+
+        fpath_index = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+
+
+        cmd = f'tar -xvf "{fpath_index}"; salmon quant -i index -l A -1 "{fpath_reads1}" -2 "{fpath_reads2}" --validateMappins -o quant; tar -cvzf quant.tar.gz quant'
+
+        generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd,
+                                        job_name='SalmonAlignQuant')
+
+        # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
+        stdout, stderr = \
+            apiDockerCall(self,
+                          image='combinelab/salmon',
+                          working_dir=tempDir,
+                          parameters=[os.path.join(tempDir, "SalmonAlignQuant_script.sh")],
+                          entrypoint="/bin/bash",
+                          user='root',
+                          stderr=True,
+                          demux=True,
+                          volumes={tempDir: {"bind": tempDir}})
+        with open(os.path.join(current_working_dir, 'SalmonAlignQuant.log'), 'wb') as f:
+            if stdout:
+                f.write(stdout)
+            if stderr:
+                f.write(stderr)
+
+        output_file_id = fileStore.writeGlobalFile(os.path.join(tempDir, 'execution', 'quant.tar.gz'))
+        quant_output_path = os.path.join(os.path.abspath(current_working_dir), 'quant.tar.gz')
+        fileStore.exportFile(output_file_id, f'file://{quant_output_path}')
+
+        return {"quant": quant_output_path}
 
 
 if __name__ == "__main__":
@@ -341,7 +235,7 @@ if __name__ == "__main__":
         SalmonIndex = FastQCone.addChild(SalmonIndexCls(ref_txome=ref_txome))
         SalmonIndex_index = SalmonIndex.rv("index")
         
-        SalmonAlignQuant = job0.addChild(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
+        SalmonAlignQuant = SalmonIndex.addChild(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
         SalmonAlignQuant_quant = SalmonAlignQuant.rv("quant")
 
         fileStore.start(FastQCone)
