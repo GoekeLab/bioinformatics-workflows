@@ -42,7 +42,6 @@ class FastQConeCls(Job):
                           working_dir=tempDir,
                           parameters=[os.path.join(tempDir, "FastQCone_script.sh")],
                           entrypoint="/bin/bash",
-                          user='root',
                           stderr=True,
                           demux=True,
                           volumes={tempDir: {"bind": tempDir}})
@@ -89,7 +88,6 @@ class FastQCtwoCls(Job):
                           working_dir=tempDir,
                           parameters=[os.path.join(tempDir, "FastQCtwo_script.sh")],
                           entrypoint="/bin/bash",
-                          user='root',
                           stderr=True,
                           demux=True,
                           volumes={tempDir: {"bind": tempDir}})
@@ -141,7 +139,6 @@ class SalmonIndexCls(Job):
                           working_dir=tempDir,
                           parameters=[os.path.join(tempDir, "SalmonIndex_script.sh")],
                           entrypoint="/bin/bash",
-                          user='root',
                           stderr=True,
                           demux=True,
                           volumes={tempDir: {"bind": tempDir}})
@@ -198,7 +195,6 @@ class SalmonAlignQuantCls(Job):
                           working_dir=tempDir,
                           parameters=[os.path.join(tempDir, "SalmonAlignQuant_script.sh")],
                           entrypoint="/bin/bash",
-                          user='root',
                           stderr=True,
                           demux=True,
                           volumes={tempDir: {"bind": tempDir}})
