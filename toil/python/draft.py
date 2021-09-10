@@ -57,7 +57,7 @@ class FastQConeCls(Job):
         fastqc_output_path = os.path.join(os.path.abspath(current_working_dir), 'readsone_fastqc.html')
         fileStore.exportFile(output_file_id, f'file://{fastqc_output_path}')
 
-        return {"fastqc_output_path": fastqc_output_path}
+        return {"fastqc_output_path": output_file_id}
 
 
 class FastQCtwoCls(Job):
@@ -104,7 +104,7 @@ class FastQCtwoCls(Job):
         fastqc_output_path = os.path.join(os.path.abspath(current_working_dir), 'readstwo_fastqc.html')
         fileStore.exportFile(output_file_id, f'file://{fastqc_output_path}')
 
-        return {"fastqc_output_path": fastqc_output_path}
+        return {"fastqc_output_path": output_file_id}
 
 
 class SalmonIndexCls(Job):
@@ -157,8 +157,7 @@ class SalmonIndexCls(Job):
         index_output_path = os.path.join(os.path.abspath(current_working_dir), 'index.tar.gz')
         fileStore.exportFile(output_file_id, f'file://{index_output_path}')
 
-        
-        return {"index" : index_output_path}
+        return {"index": output_file_id}
 
 
 class SalmonAlignQuantCls(Job):
@@ -215,7 +214,7 @@ class SalmonAlignQuantCls(Job):
         quant_output_path = os.path.join(os.path.abspath(current_working_dir), 'quant.tar.gz')
         fileStore.exportFile(output_file_id, f'file://{quant_output_path}')
 
-        return {"quant": quant_output_path}
+        return {"quant": output_file_id}
 
 
 if __name__ == "__main__":
@@ -225,23 +224,28 @@ if __name__ == "__main__":
     pkg_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
     with Toil(options) as fileStore:
-        reads1 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_1.fq.gz"))
-        reads2 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_2.fq.gz"))
-        ref_txome = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/transcriptome.fa"))
+        # import all files into the jobstore and retrieve their file ID references
+        # that way jobs run remotely can fetch from the centralized jobstore without sharing a filesystem
+        reads1_file_id = fileStore.importFile(f'file://{os.path.join(pkg_root, "test_data/reads_1.fq.gz")}')
+        reads2_file_id = fileStore.importFile(f'file://{os.path.join(pkg_root, "test_data/reads_2.fq.gz")}')
+        ref_transcriptome_file_id = fileStore.importFile(f'file://{os.path.join(pkg_root, "test_data/transcriptome.fa")}')
         
-        FastQCone = FastQConeCls(reads=reads1)
-        fastqc_output_report_path = FastQCone.rv("fastqc_res")
+        fastqc_job_1 = FastQConeCls(reads=reads1_file_id)  # this is our root job, which runs first
+        fastqc_output_report_path = fastqc_job_1.rv("fastqc_res")  # "rv" == return value
 
-        FastQCtwo = FastQCtwoCls(reads=reads2)
-        FastQCtwo_fastqc_res = FastQCtwo.rv("fastqc_res")
-        FastQCone.addChild(FastQCtwo)
+        fastqc_job_2 = FastQCtwoCls(reads=reads2_file_id)
+        FastQCtwo_fastqc_res = fastqc_job_2.rv("fastqc_res")
+        fastqc_job_1.addChild(fastqc_job_2)  # fastqc_job_2 will run after our root job
         
-        SalmonIndex = FastQCone.addChild(SalmonIndexCls(ref_txome=ref_txome))
-        SalmonIndex_index = SalmonIndex.rv("index")
-        
-        SalmonAlignQuant = FastQCone.addFollowOn(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
-        SalmonAlignQuant_quant = SalmonAlignQuant.rv("quant")
+        salmon_index_job = SalmonIndexCls(ref_txome=ref_transcriptome_file_id)
+        index_file_id = salmon_index_job.rv("index")
+        fastqc_job_1.addChild(salmon_index_job)  # salmon_index_job will run after our root job
 
-        fileStore.start(FastQCone)
+        salmon_align_quant_job = SalmonAlignQuantCls(reads1=reads1_file_id, reads2=reads2_file_id, index=index_file_id)
+        fastqc_job_1.addFollowOn(salmon_align_quant_job)
+        # we don't do anything our results, but we could
+        salmon_align_quant_file_id = salmon_align_quant_job.rv("quant")
+
+        fileStore.start(fastqc_job_1)
 
 #/home/hexotical/bioinformatics-workflows/toil/python/index.tar.gz
