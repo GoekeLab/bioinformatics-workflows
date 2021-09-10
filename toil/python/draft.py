@@ -126,7 +126,11 @@ class SalmonIndexCls(Job):
                 raise
 
         fpath = fileStore.readGlobalFile(self.ref_txome, userPath=os.path.join(tempDir, os.path.basename(self.ref_txome)))
-        cmd = f'salmon index -t "{fpath}" -i index; tar -cvzf index.tar.gz index'
+
+        index_fpath = os.makedirs(os.path.join(tempDir, 'execution', 'index'))
+
+
+        cmd = f'salmon index -t {fpath} --index "{index_fpath}";  tar -cvzf index.tar.gz {index_fpath}'#; tar -cvzf index.tar.gz "{index_fpath}"'#-i index; tar -cvzf index.tar.gz index'
 
         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='SalmonIndex')
 
@@ -154,7 +158,7 @@ class SalmonIndexCls(Job):
         fileStore.exportFile(output_file_id, f'file://{index_output_path}')
 
         
-        return {"index_output_path" : index_output_path}
+        return {"index" : index_output_path}
 
 
 class SalmonAlignQuantCls(Job):
@@ -178,14 +182,14 @@ class SalmonAlignQuantCls(Job):
             if e.errno != errno.EEXIST:
                 raise
         
-        fpath_reads1 = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+        fpath_reads1 = fileStore.readGlobalFile(self.reads1, userPath=os.path.join(tempDir, os.path.basename(self.reads1)))
 
-        fpath_reads2 = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+        fpath_reads2 = fileStore.readGlobalFile(self.reads2, userPath=os.path.join(tempDir, os.path.basename(self.reads2)))
 
-        fpath_index = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
+        fpath_index = fileStore.readGlobalFile(self.index, userPath=os.path.join(tempDir, os.path.basename(self.index)))
 
 
-        cmd = f'tar -xvf "{fpath_index}"; salmon quant -i index -l A -1 "{fpath_reads1}" -2 "{fpath_reads2}" --validateMappins -o quant; tar -cvzf quant.tar.gz quant'
+        cmd = f'tar -xvf "{fpath_index}"; salmon quant -i index -l A -1 "{fpath_reads1}" -2 "{fpath_reads2}" --validateMappings -o quant; tar -cvzf quant.tar.gz quant'
 
         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd,
                                         job_name='SalmonAlignQuant')
@@ -235,7 +239,9 @@ if __name__ == "__main__":
         SalmonIndex = FastQCone.addChild(SalmonIndexCls(ref_txome=ref_txome))
         SalmonIndex_index = SalmonIndex.rv("index")
         
-        SalmonAlignQuant = SalmonIndex.addChild(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
+        SalmonAlignQuant = FastQCone.addFollowOn(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
         SalmonAlignQuant_quant = SalmonAlignQuant.rv("quant")
 
         fileStore.start(FastQCone)
+
+#/home/hexotical/bioinformatics-workflows/toil/python/index.tar.gz
