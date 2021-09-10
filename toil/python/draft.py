@@ -57,7 +57,7 @@ class FastQConeCls(Job):
         fastqc_output_path = os.path.join(os.path.abspath(current_working_dir), 'readsone_fastqc.html')
         fileStore.exportFile(output_file_id, f'file://{fastqc_output_path}')
 
-        return {"fastqc_output_path": output_file_id}
+        return {"fastqc": output_file_id}
 
 
 class FastQCtwoCls(Job):
@@ -104,7 +104,7 @@ class FastQCtwoCls(Job):
         fastqc_output_path = os.path.join(os.path.abspath(current_working_dir), 'readstwo_fastqc.html')
         fileStore.exportFile(output_file_id, f'file://{fastqc_output_path}')
 
-        return {"fastqc_output_path": output_file_id}
+        return {"fastqc": output_file_id}
 
 
 class SalmonIndexCls(Job):
@@ -180,11 +180,9 @@ class SalmonAlignQuantCls(Job):
         except OSError as e:
             if e.errno != errno.EEXIST:
                 raise
-        
+
         fpath_reads1 = fileStore.readGlobalFile(self.reads1, userPath=os.path.join(tempDir, os.path.basename(self.reads1)))
-
         fpath_reads2 = fileStore.readGlobalFile(self.reads2, userPath=os.path.join(tempDir, os.path.basename(self.reads2)))
-
         fpath_index = fileStore.readGlobalFile(self.index, userPath=os.path.join(tempDir, os.path.basename(self.index)))
 
 
@@ -231,10 +229,10 @@ if __name__ == "__main__":
         ref_transcriptome_file_id = fileStore.importFile(f'file://{os.path.join(pkg_root, "test_data/transcriptome.fa")}')
         
         fastqc_job_1 = FastQConeCls(reads=reads1_file_id)  # this is our root job, which runs first
-        fastqc_output_report_path = fastqc_job_1.rv("fastqc_res")  # "rv" == return value
+        fastqc_output_report_file_id_1 = fastqc_job_1.rv("fastqc")  # "rv" == return value
 
         fastqc_job_2 = FastQCtwoCls(reads=reads2_file_id)
-        FastQCtwo_fastqc_res = fastqc_job_2.rv("fastqc_res")
+        fastqc_output_report_file_id_2 = fastqc_job_2.rv("fastqc")
         fastqc_job_1.addChild(fastqc_job_2)  # fastqc_job_2 will run after our root job
         
         salmon_index_job = SalmonIndexCls(ref_txome=ref_transcriptome_file_id)
