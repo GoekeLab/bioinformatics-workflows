@@ -111,16 +111,12 @@ class SalmonIndexCls(Job):
         super(SalmonIndexCls, self).__init__(*args, **kwargs)
         Job.__init__(self)
 
-        self.id_ref_txome = ref_txome
-        self.id_index = WDLStringType().create(
-            'index')
+        self.ref_txome = ref_txome
+        self.index = index
 
     def run(self, fileStore):
         fileStore.logToMaster("SalmonIndex")
         tempDir = fileStore.getLocalTempDir()
-
-        _toil_wdl_internal__stdout_file = os.path.join(tempDir, 'stdout')
-        _toil_wdl_internal__stderr_file = os.path.join(tempDir, 'stderr')
 
         try:
             os.makedirs(os.path.join(tempDir, 'execution'))
@@ -128,73 +124,13 @@ class SalmonIndexCls(Job):
             if e.errno != errno.EEXIST:
                 raise
 
-        ref_txome = process_and_read_file(abspath_file(self.id_ref_txome, current_working_dir),
-                                          tempDir, fileStore, docker=True)
-        index = self.id_index
+        fpath = fileStore.readGlobalFile(self.ref_txome, userPath=os.path.join(tempDir, os.path.basename(self.ref_txome)))
+        cmd = f'salmon index -t "{fpath}" -i index; tar -cvzf index.tar.gz index'
 
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command6 = r'''
-             salmon index -t "'''
-        except:
-            command6 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command7 = str(
-                ref_txome if not isinstance(ref_txome, WDLFile) else process_and_read_file(ref_txome, tempDir,
-                                                                                           fileStore)).strip("\n")
-        except:
-            command7 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command8 = r'''" -i '''
-        except:
-            command8 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command9 = str(
-                index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
-                "\n")
-        except:
-            command9 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command10 = r'''; tar -cvzf index.tar.gz '''
-        except:
-            command10 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command11 = str(
-                index if not isinstance(index, WDLFile) else process_and_read_file(index, tempDir, fileStore)).strip(
-                "\n")
-        except:
-            command11 = ''
-
-        try:
-            # Intended to deal with "optional" inputs that may not exist
-            # TODO: handle this better
-            command12 = r'''
-          '''
-        except:
-            command12 = ''
-
-        cmd = command6 + command7 + command8 + command9 + command10 + command11 + command12
-        cmd = textwrap.dedent(cmd.strip("\n"))
         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='SalmonIndex')
 
         # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
-        _toil_wdl_internal__stdout, _toil_wdl_internal__stderr = \
+        stdout, stderr = \
             apiDockerCall(self,
                           image='combinelab/salmon',
                           working_dir=tempDir,
@@ -204,26 +140,20 @@ class SalmonIndexCls(Job):
                           stderr=True,
                           demux=True,
                           volumes={tempDir: {"bind": tempDir}})
+
         with open(os.path.join(current_working_dir, 'SalmonIndex.log'), 'wb') as f:
-            if _toil_wdl_internal__stdout:
-                f.write(_toil_wdl_internal__stdout)
-            if _toil_wdl_internal__stderr:
-                f.write(_toil_wdl_internal__stderr)
+            if stdout:
+                f.write(stdout)
+            if stderr:
+                f.write(stderr)
 
-        _toil_wdl_internal__stdout_file = generate_stdout_file(_toil_wdl_internal__stdout,
-                                                               tempDir,
-                                                               fileStore=fileStore)
-        _toil_wdl_internal__stderr_file = generate_stdout_file(_toil_wdl_internal__stderr,
-                                                               tempDir,
-                                                               fileStore=fileStore,
-                                                               stderr=True)
 
-        index = WDLFileType().create(
-            'index.tar.gz', output=True)
-        index = process_outfile(index, fileStore, tempDir, '/home/quokka/git/bioinformatics-workflows')
+        output_file_id = fileStore.writeGlobalFile(os.path.join(tempDir, 'execution', 'index.tar.gz'))
+        index_output_path = os.path.join(os.path.abspath(current_working_dir), 'index.tar.gz')
+        fileStore.exportFile(output_file_id, f'file://{index_output_path}')
 
-        rvDict = {"index": index}
-        return rvDict
+        
+        return {"index_output_path" : index_output_path}
 #
 #
 # class SalmonAlignQuantCls(Job):
@@ -400,18 +330,18 @@ if __name__ == "__main__":
         reads1 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_1.fq.gz"))
         reads2 = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/reads_2.fq.gz"))
         ref_txome = fileStore.importFile('file://' + os.path.join(pkg_root, "test_data/transcriptome.fa"))
-
+        
         FastQCone = FastQConeCls(reads=reads1)
         fastqc_output_report_path = FastQCone.rv("fastqc_res")
 
         FastQCtwo = FastQCtwoCls(reads=reads2)
         FastQCtwo_fastqc_res = FastQCtwo.rv("fastqc_res")
         FastQCone.addChild(FastQCtwo)
-        #
-        # SalmonIndex = job0.addChild(SalmonIndexCls(ref_txome=ref_txome))
-        # SalmonIndex_index = SalmonIndex.rv("index")
-        #
-        # SalmonAlignQuant = job0.addChild(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
-        # SalmonAlignQuant_quant = SalmonAlignQuant.rv("quant")
+        
+        SalmonIndex = FastQCone.addChild(SalmonIndexCls(ref_txome=ref_txome))
+        SalmonIndex_index = SalmonIndex.rv("index")
+        
+        SalmonAlignQuant = job0.addChild(SalmonAlignQuantCls(reads1=reads1, reads2=reads2, index=(SalmonIndex_index)))
+        SalmonAlignQuant_quant = SalmonAlignQuant.rv("quant")
 
         fileStore.start(FastQCone)
