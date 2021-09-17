@@ -5,7 +5,7 @@ The Workflow Description Language ([WDL](https://openwdl.org/)) is a workflow sp
 - [WDL tutorials](https://support.terra.bio/hc/en-us/sections/360007347652-WDL-Tutorials)
 - [WDL documentation](https://support.terra.bio/hc/en-us/sections/360007274612-WDL-Documentation)
 
-## Community-developed workflows in snakemake
+## Community-developed workflows in WDL
 [BioWDL](https://github.com/biowdl) contains a collection of community developed pipelines written in WDL.
 
 ## Running the proof of concept WDL pipeline
