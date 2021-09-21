@@ -32,7 +32,7 @@ class FastQConeCls(Job):
 
         fpath = fileStore.readGlobalFile(self.reads, userPath=os.path.join(tempDir, os.path.basename(self.reads)))
         cmd = f'zcat "{fpath}" | fastqc stdin:readsone'
-
+        #cmd = f'ls -lha .. && ls -lha && echo {fpath} && pwd'
         generate_docker_bashscript_file(temp_dir=tempDir, docker_dir=tempDir, globs=[], cmd=cmd, job_name='FastQCone')
 
         # apiDockerCall() with demux=True returns a tuple of bytes objects (stdout, stderr).
@@ -243,3 +243,4 @@ if __name__ == "__main__":
         fileStore.start(fastqc_job_1)
 
 #/home/hexotical/bioinformatics-workflows/toil/python/index.tar.gz
+#/home/luk/venv/lib/python3.8/site-packages/toil/leader.py

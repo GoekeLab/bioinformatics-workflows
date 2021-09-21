@@ -3,12 +3,12 @@ quant: quant
 libtype: A
 fqOne: 
   class: File
-  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/reads_1.fq
+  location: /home/luk/Desktop/bioinformatics-workflows/test_data/reads_1.fq.gz
   format: http://edamontology.org/format_1930
 fqTwo: 
   class: File
-  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/reads_2.fq
+  location: /home/luk/Desktop/bioinformatics-workflows/test_data/reads_2.fq.gz
   format: http://edamontology.org/format_1930
 transcriptome:
   class: File
-  location: /home/hexotical/bioinformatics-workflows/toil/cwl/data/transcriptome.fa
+  location: /home/luk/Desktop/bioinformatics-workflows/test_data/transcriptome.fa
