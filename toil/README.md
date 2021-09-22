@@ -48,9 +48,9 @@ Docker isn't a necessity however we offer the option of using docker to increase
 # Python
 
 1. Install the files under `toil/python` locally
-    - `example.py` is both workflow specification and input
+    - `draft.py` is both workflow specification and input, modify for desired file paths
 2. Run the pipeline with the following command:
-    `python example.py file:my-job-store`
+    `python3 draft.py file:my-job-store`
 
 
 ## Notes and Contribution
