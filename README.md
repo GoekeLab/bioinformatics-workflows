@@ -26,6 +26,7 @@ Each workflow manager folder in this repository has a README detailing how to ru
 - [Snakemake](snakemake) ⭐
 - [SciPipe](scipipe) ⭐
 - [GenPipes](genpipes) ⭐
+- [Bpipe](bpipe) ⭐
 - [WDL](wdl)
 
 
@@ -57,3 +58,4 @@ We would like to thank the following people for their contribution to this repos
 - [Samuel Lampa](https://github.com/samuell) for the [SciPipe workflow](scipipe)
 - [Marius van den Beek](https://github.com/mvdbeek) for the [Galaxy workflow](galaxy)
 - [José Héctor Gálvez López](https://github.com/pphector), Pierre-Olivier Quirion, Edouard Henrion, and Mathieu Bourgey for the [GenPipes workflow](genpipes)
+- [Simon Sadedin](https://github.com/ssadedin) for the [Bpipe workflow](bpipe)
