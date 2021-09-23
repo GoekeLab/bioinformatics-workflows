@@ -27,7 +27,8 @@ Each workflow manager folder in this repository has a README detailing how to ru
 - [SciPipe](scipipe) ⭐
 - [GenPipes](genpipes) ⭐
 - [Bpipe](bpipe) ⭐
-- [WDL](wdl)
+- [Toil (WDL/CWL/Python)](toil) ⭐
+- [cromwell (WDL)](wdl)
 
 
 ## Online Documentation for Workflow managers
@@ -59,3 +60,4 @@ We would like to thank the following people for their contribution to this repos
 - [Marius van den Beek](https://github.com/mvdbeek) for the [Galaxy workflow](galaxy)
 - [José Héctor Gálvez López](https://github.com/pphector), Pierre-Olivier Quirion, Edouard Henrion, and Mathieu Bourgey for the [GenPipes workflow](genpipes)
 - [Simon Sadedin](https://github.com/ssadedin) for the [Bpipe workflow](bpipe)
+- [Lukas Koziol](https://github.com/Hexotical) Adam Novak, Benedict Paten, and Lon Blauvelt for the [Toil workflows](toil)
