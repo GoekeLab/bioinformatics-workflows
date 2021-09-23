@@ -1,0 +1,5 @@
+{
+  "wdl_poc.reads1": "test_data/reads_1.fq.gz",
+  "wdl_poc.reads2": "test_data/reads_2.fq.gz",
+  "wdl_poc.ref_txome": "test_data/transcriptome.fa"
+}

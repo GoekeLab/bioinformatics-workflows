@@ -1,0 +1,14 @@
+index: salmon_index
+quant: quant
+libtype: A
+fqOne: 
+  class: File
+  location: path/to/reads_1.fq.gz
+  format: http://edamontology.org/format_1930
+fqTwo: 
+  class: File
+  location: path/to/reads_2.fq.gz
+  format: http://edamontology.org/format_1930
+transcriptome:
+  class: File
+  location: path/to/transcriptome.fa
