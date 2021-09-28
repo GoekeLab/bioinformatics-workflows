@@ -45,7 +45,7 @@ Done!
 
 ## Notes and Contribution
 
-This pipeline is a minimal example of using X. We welcome contributions to the
+This pipeline is a minimal example of using SciPipe. We welcome contributions to the
 documentation and workflow, please create an issue or submit a pull request!
 
 ## How to cite SciPipe
