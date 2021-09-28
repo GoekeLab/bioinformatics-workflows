@@ -1,7 +1,7 @@
 ## About SciPipe
 
 SciPipe is a workflow library implemented as a programming library in Go.
-See [scipipe.org](https://scipipe/org) for more information!
+See [scipipe.org](https://scipipe.org) for more information!
 
 ## Training material and documentation
 
