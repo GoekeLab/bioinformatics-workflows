@@ -1,8 +1,8 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl=2
 
-// Define pipeline inpit parameretes 
-// note: input files requires the use of absolute paths
+// Define pipeline input parameters 
+// note: input files require the use of absolute paths
 params.ref = '/path/to/ref.fasta'
 params.left = '/path/to/reads_1.fastq'
 params.right = '/path/to/reads_2.fastq'
