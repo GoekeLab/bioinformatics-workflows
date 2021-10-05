@@ -1,5 +1,7 @@
 # Reproducible, scalable, and shareable analysis pipelines with bioinformatics workflow managers
 
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/GoekeLab/bioinformatics-workflows)](https://github.com/GoekeLab/bioinformatics-workflows/releases/)
+
 Workflow managers provide an easy and intuitive way to simplify pipeline development. Here we provide basic proof-of-concept implementations for selected workflow managers. The analysis workflow is based on a small portion of an RNA-seq pipeline, using fastqc for quality controls and salmon for transcript quantification.
 These implementations are designed for basic illustrations. Workflow managers provide many more powerful features than what we use here, please visit the official documentations to explore those in detail.
 
