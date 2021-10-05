@@ -47,6 +47,12 @@ Workflow managers have many more features which are not used in these implementa
 - [CWL](https://www.commonwl.org/user_guide/index.html)
 - [Toil](https://toil.readthedocs.io/en/latest/)
 
+
+## About this repository
+The repository was created to illustrate features of workflow managers that are discussed in detail in this manuscript:
+
+Wratten, L., Wilm, A. & Göke, J. Reproducible, scalable, and shareable analysis pipelines with bioinformatics workflow managers. _Nat Methods_ (2021). https://doi.org/10.1038/s41592-021-01254-9 (Full text link: https://rdcu.be/cyjRN)
+
 ## Contact and Call for Contribution
 This repository was created by [Laura Wratten](https://github.com/lwratten). We very much encourage contributions by users of these workflows. If you would like to add an implementation for any of these workflow managers you can follow the [template](template/README.md). If you would like to suggest changes to any of the existing implementations, please raise an issue and submit a pull request.
 
