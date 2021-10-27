@@ -1,0 +1,59 @@
+# Site settings
+title: Bioinformatics Workflows
+email: your-email@domain.com
+description: >
+  Minimal example implementations for bioinformatics workflow managers
+lang: en-US
+
+baseurl: "/bioinformatics-workflows" # the subpath of your site, e.g. /blog/
+domain: goekelab.github.io
+url: https://goekelab.github.io/ # the base hostname & protocol for your site
+git_address: https://github.com/GoekeLab/bioinformatics-workflows
+git_edit_address: https://github.com/GoekeLab/bioinformatics-workflows
+
+# theme options from https://bootswatch.com/3/
+# comment out this to use default Bootstrap
+bootwatch: paper # cerulean cosmo custom cyborg darkly flatly journal lumen readable sandstone simplex slate solar spacelab superhero united yeti
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+# Plugins (previously gems:)
+plugins:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-code-tabs
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .idea/
+  - .gitignore
+  - README.md
+timezone: Europe/Berlin
+defaults:
+- scope:
+    path: _posts
+    type: posts
+  values:
+    layout: post
+    sectionid: blog
+
+- scope:
+    path: _docs
+    type: docs
+  values:
+    layout: docs
+    sectionid: docs
+    seo:
+      type: "WebPage"
+
+collections:
+  docs:
+    permalink: /:collection/:path/
+    output: true
+  posts:
+    permalink: /blog/:year/:month/:day/:title/
+    output: true
